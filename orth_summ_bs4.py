@@ -40,16 +40,16 @@ def main():
         f.write('{:^70}{:^70}{:^70}'.format(local_weather, current_date, str(dt)) + '\n')
         print('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)))
         f.write('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)) + '\n')
-        print('*' * 210)
-        f.write('*' * 210 + '\n')
-        print('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^50}{:>20}'.format('Linkname', 'IP', 'Site', 'TX Power/Max', 'RSSI',
+        print('*' * 220)
+        f.write('*' * 220 + '\n')
+        print('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^60}{:>20}'.format('Linkname', 'IP', 'Site', 'TX Power/Max', 'RSSI',
                                                                         'TX MOD/RX MOD', 'Modulation Detail',
                                                                         'Link Capacity'))
-        f.write('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^50}{:>20}'.format('Linkname', 'IP', 'Site', 'TX Power/Max', 'RSSI',
+        f.write('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^60}{:>20}'.format('Linkname', 'IP', 'Site', 'TX Power/Max', 'RSSI',
                                                                           'TX MOD/RX MOD', 'Modulation Detail',
                                                                           'Link Capacity') + '\n')
-        print('*' * 210 + '\n')
-        f.write(('*' * 210 + '\n'))
+        print('*' * 220 + '\n')
+        f.write(('*' * 220 + '\n'))
         for o in device_list.devices:
             try:
                 s = (f'10.27.11.{o}')
@@ -82,17 +82,17 @@ def main():
                 tx_mod = tx_mod.split()  # removing duplicates
                 tx_mod = tx_mod[0:2]
                 tx_mod = ' '.join(tx_mod)
-                print('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^50}{:>20}'.format(hostname, s, site_name,
+                print('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^60}{:>20}'.format(hostname, s, site_name,
                                                                                 (tx_power + '/' + max_tx_power),
                                                                                 rx_power, (tx_mod + '/' + rx_mod),
                                                                                 mod_detail, (link_capacity + 'Mbps')))
-                f.write('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^50}{:>20}'.format(hostname, s, site_name,
+                f.write('{:<20}{:^15}{:^25}{:^15}{:^15}{:^45}{:^60}{:>20}'.format(hostname, s, site_name,
                                                                                   (tx_power + '/' + max_tx_power),
                                                                                   rx_power, (tx_mod + '/' + rx_mod),
                                                                                   mod_detail,
                                                                                   (link_capacity + 'Mbps')) + '\n')
-                print('-' * 210)
-                f.write('-' * 210 + '\n')
+                print('-' * 220)
+                f.write('-' * 220 + '\n')
                 time.sleep(1)
                 f.write('\n')
             except(ConnectionError, TimeoutError, Exception) as e:
