@@ -8,6 +8,10 @@ from urllib import error
 dt = datetime.now().time()
 dt = dt.replace(microsecond=0)
 dt_date = datetime.now().date()
+
+file_format_time = str(dt).replace(':', '_')
+file_format_date = str(dt_date).replace('-', '_')
+
 current_date = (dt_date.strftime('%m/%d/%Y'))  # formatting date to mm/dd/yyy
 
 orth = ['71', '72', '73', '74', '75', '76', '77', '78', '79', '80',
@@ -21,7 +25,7 @@ current_temp = int(current_temp)
 canadian_temp = (current_temp - 32) * (5 / 9)
 local_weather = (str(current_temp) + 'F/' + str(int(canadian_temp)) + 'C')
 
-with open('orthogon_scrolling.txt', 'w') as f:
+with open(f'output_logs/log_{file_format_date}_{file_format_time}.txt', 'w') as f:
     print('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)))
     f.write('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)) + '\n')
     print('{:^70}{:^70}{:^70}'.format(local_weather, current_date, str(dt)))
