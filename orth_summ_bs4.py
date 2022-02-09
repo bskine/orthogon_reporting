@@ -4,6 +4,7 @@ from datetime import datetime
 import time
 from requests import ConnectionError, HTTPError
 from urllib import error
+from shared import device_list
 
 dt = datetime.now().time()
 dt = dt.replace(microsecond=0)
@@ -14,8 +15,8 @@ file_format_date = str(dt_date).replace('-', '_')
 
 current_date = (dt_date.strftime('%m/%d/%Y'))  # formatting date to mm/dd/yyy
 
-orth = ['71', '72', '73', '74', '75', '76', '77', '78', '79', '80',
-        '87', '88', '92', '100', '96', '95', '97', '135', '105', '106']
+# orth = ['71', '72', '73', '74', '75', '76', '77', '78', '79', '80',
+#        '87', '88', '92', '100', '96', '95', '97', '135', '105', '106']
 
 theurl = 'https://w1.weather.gov/obhistory/PAQT.html'
 thepage = urllib.request.urlopen(theurl)
@@ -25,7 +26,7 @@ current_temp = int(current_temp)
 canadian_temp = (current_temp - 32) * (5 / 9)
 local_weather = (str(current_temp) + 'F/' + str(int(canadian_temp)) + 'C')
 
-with open(f'output_logs/log_{file_format_date}_{file_format_time}.txt', 'w') as f:
+with open(f'log_{file_format_date}_{file_format_time}.txt', 'w') as f:
     print('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)))
     f.write('{:^70}{:^70}{:^70}'.format(('.' * 10), ('.' * 10), ('.' * 10)) + '\n')
     print('{:^70}{:^70}{:^70}'.format(local_weather, current_date, str(dt)))
@@ -42,9 +43,9 @@ with open(f'output_logs/log_{file_format_date}_{file_format_time}.txt', 'w') as 
                                                                       'Link Capacity') + '\n')
     print('*' * 210 + '\n')
     f.write(('*' * 210 + '\n'))
-    for s in orth:
+    for o in device_list.devices:
         try:
-            s = ('10.27.11.' + str(s))
+            s = (f'10.27.11. {o}')
             url_address = 'http://' + str(s) + '/top.cgi?xsrf=&1'
             status_page = urllib.request.urlopen(url_address)
             status = BeautifulSoup(status_page, features='lxml')
