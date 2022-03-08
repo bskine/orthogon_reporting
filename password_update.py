@@ -1,4 +1,3 @@
-import logging
 import time
 
 from selenium import webdriver
@@ -7,12 +6,6 @@ from selenium.webdriver.edge import service
 
 # from selenium.webdriver.support.ui import WebDriverWait
 from shared_lists import device_list
-
-logging.basicConfig(filename="testfile.log", )
-
-logging.debug("This is a debug message")
-logging.warning("This is a warning message")
-logging.error("This is a error message")
 
 
 pass_2021 = "COPradio2021!"
