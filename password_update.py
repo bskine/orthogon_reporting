@@ -11,6 +11,7 @@ pass_2022 = "COPradio2022!"
 edgeOption = webdriver.EdgeOptions()
 edgeOption.use_chromium = True
 # edgeOption.add_argument("start-maximized")
+# edgeOption.add_argument("headless")
 edgeOption.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 s = service.Service(r'C:\Users\pboynto\edge\msedgedriver.exe')
 driver = webdriver.Edge(service=s, options=edgeOption)
