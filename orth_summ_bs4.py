@@ -109,5 +109,6 @@ def main():
                 f.write(s + 'is offline' + '\n')
                 continue
 
+
 if __name__ == '__main__':
     main()

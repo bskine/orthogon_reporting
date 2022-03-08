@@ -1,10 +1,12 @@
+import logging
+import time
+
 from selenium import webdriver
-from selenium.webdriver.edge import service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.edge import service
+
 # from selenium.webdriver.support.ui import WebDriverWait
 from shared_lists import device_list
-import time
-import logging
 
 logging.basicConfig(filename="testfile.log", )
 
@@ -25,20 +27,25 @@ driver = webdriver.Edge(service=s, options=edgeOption)
 
 
 def login():
-    url = "http://10.27.11.88/password.cgi?xsrf=&0"
-    driver.get(url)
-#    wait = WebDriverWait(driver, 5)
-    x = driver.find_element(By.ID, value="password")
-    x.send_keys(pass_2021)
-    driver.find_element(by=By.NAME, value="login_submit").click()
-    time.sleep(1)
-    old_pass_prompt = driver.find_element(By.ID, value="currentPassword")
-    old_pass_prompt.send_keys(pass_2021)
-    new_pass_prompt = driver.find_element(By.ID, value="newPassword")
-    new_pass_prompt.send_keys(pass_2022)
-    confirm_pass_prompt = driver.find_element(By.ID, value="confirmNewPassword")
-    confirm_pass_prompt.send_keys(pass_2022)
-    driver.find_element(by=By.NAME, value="pswd_update_submit").click()
+    for i in device_list.devices:
+        try:
+            url = i
+            driver.get(url)
+        #    wait = WebDriverWait(driver, 5)
+            x = driver.find_element(By.ID, value="password")
+            x.send_keys(pass_2021)
+            driver.find_element(by=By.NAME, value="login_submit").click()
+            time.sleep(1)
+            old_pass_prompt = driver.find_element(By.ID, value="currentPassword")
+            old_pass_prompt.send_keys(pass_2021)
+            new_pass_prompt = driver.find_element(By.ID, value="newPassword")
+            new_pass_prompt.send_keys(pass_2022)
+            confirm_pass_prompt = driver.find_element(By.ID, value="confirmNewPassword")
+            confirm_pass_prompt.send_keys(pass_2022)
+            driver.find_element(by=By.NAME, value="pswd_update_submit").click()
+        except Exception as e:
+            print(f'{i} has failed due to {e}')
+            continue
 
 
 def change_password():
