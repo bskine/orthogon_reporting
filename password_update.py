@@ -1,12 +1,9 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge import service
-
 # from selenium.webdriver.support.ui import WebDriverWait
 from shared_lists import device_list
-
 
 pass_2021 = "COPradio2021!"
 pass_2022 = "COPradio2022!"
@@ -39,16 +36,6 @@ def login():
         except Exception as e:
             print(f'{i} has failed due to {e}')
             continue
-
-
-def change_password():
-    old_pass_prompt = driver.find_element(By.ID, value="currentPassword")
-    old_pass_prompt.send_keys(pass_2021)
-    new_pass_prompt = driver.find_element(By.ID, value="newPassword")
-    new_pass_prompt.send_keys(pass_2022)
-    confirm_pass_prompt = driver.find_element(By.ID, value="confirmNewPassword")
-    confirm_pass_prompt.send_keys(pass_2022)
-    driver.find_element(by=By.NAME, value="pswd_update_submit").click()
 
 
 def main():
